@@ -1,11 +1,17 @@
 <ion-header>
   <ion-navbar>
+    <ion-buttons start>
+      <button ion-button icon-only (click)="addWhiteBoardImage()">
+        <ion-icon name="camera"></ion-icon>
+      </button>
+    </ion-buttons>
+
     <ion-title>
       Whiteboard Capture
     </ion-title>
     <ion-buttons end>
       <button ion-button icon-only (click)="openGallery()">
-        <ion-icon name="add"></ion-icon>
+        <ion-icon name="image"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
