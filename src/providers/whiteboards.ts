@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 
+import { Storage } from '@ionic/storage';
+
 /*
   Generated class for the Whiteboards provider.
 
@@ -13,7 +15,10 @@ export class Whiteboards {
 
   whiteboardImageUris: string[];
 
-  constructor(public http: Http) {
+  constructor(
+    public http: Http,
+    private storage: Storage
+  ) {
     this.whiteboardImageUris = [];
     this.load();
   }
@@ -26,10 +31,15 @@ export class Whiteboards {
     this.whiteboardImageUris.push(whiteboardImageUri);
     this.save()
   }
-  
+
 
   public removeAtIndex(i: number){
     this.whiteboardImageUris.splice(i,1);
+    this.save()
+  }
+
+  public addAtIndex(i: number,item:string){
+    this.whiteboardImageUris.splice(i,0,item);
     this.save()
   }
 
@@ -39,10 +49,18 @@ export class Whiteboards {
   }
 
   private save(){
-
+    this.storage.set('whiteboard_uris', JSON.stringify(this.whiteboardImageUris));
   }
 
   private load(){
-
+    this.storage.get('whiteboard_uris').then((uris) => {
+      var uriList = JSON.parse(uris);
+      if (uriList != null && typeof uriList !== 'undefined'){
+        for (var uri of uriList) {
+          this.whiteboardImageUris.push(uri); 
+        }
+      }
+    })
   }
+
 }

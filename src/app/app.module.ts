@@ -8,6 +8,9 @@ import { Whiteboards } from '../providers/whiteboards'
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Camera } from '@ionic-native/camera';
+import { IonicStorageModule} from '@ionic/storage';
+import { PhotoViewer } from '@ionic-native/photo-viewer';
+import { ImagePicker } from '@ionic-native/image-picker'
 
 @NgModule({
   declarations: [
@@ -15,7 +18,8 @@ import { Camera } from '@ionic-native/camera';
     HomePage
   ],
   imports: [
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -27,7 +31,9 @@ import { Camera } from '@ionic-native/camera';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     Whiteboards,
-    Camera
+    Camera,
+    PhotoViewer,
+    ImagePicker
   ]
 })
 export class AppModule {}

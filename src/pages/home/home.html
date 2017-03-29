@@ -1,10 +1,10 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Ionic Blank
+      Whiteboard Capture
     </ion-title>
     <ion-buttons end>
-      <button ion-button icon-only (click)="addWhiteBoardImage()">
+      <button ion-button icon-only (click)="openGallery()">
         <ion-icon name="add"></ion-icon>
       </button>
     </ion-buttons>
@@ -12,5 +12,34 @@
 </ion-header>
 
 <ion-content>
-  <img *ngFor="let whiteboardImageUri of whiteboardImageUris" [src]="whiteboardImageUri"/>  
+  <ion-card *ngFor="let whiteboardImageUri of whiteboardImageUris;let i = index">
+  <img [src]="whiteboardImageUri">
+  <ion-row>
+    <ion-col>
+      <button ion-button icon-left clear small color="danger" (click)="removeItem(i)">
+        <ion-icon name="trash"></ion-icon>
+        <div>Delete</div>
+      </button>
+    </ion-col>
+    <ion-col>
+      <button ion-button icon-left clear small (click)="moveItemUp(whiteboardImageUri,i)">
+        <ion-icon name="arrow-round-up"></ion-icon>
+        <div>Up</div>
+      </button>
+    </ion-col>
+    <ion-col>
+      <button ion-button icon-left clear small (click)="moveItemDown(whiteboardImageUri,i)">
+        <ion-icon name="arrow-round-down"></ion-icon>
+        <div>Down</div>
+      </button>
+    </ion-col>
+    <ion-col>
+      <button ion-button icon-left clear small color="secondary" (click)="showItem(whiteboardImageUri)">
+        <ion-icon name="eye"></ion-icon>
+        <div>View</div>
+      </button>
+    </ion-col>
+  </ion-row>
+
+</ion-card> 
 </ion-content>
